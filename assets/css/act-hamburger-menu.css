@@ -1,0 +1,117 @@
+.act-mobile-menu{
+    width:100%;
+    display:flex;
+    justify-content: var(--act-menu-position); /* Align to the right */
+    align-items: center; /* Vertically align the button */
+}
+/* Div to contain the hamburger button */
+.act-menu-toggle-div{
+    display:flex;
+    justify-content: flex-end; /* Align button to the right */
+    height:25px;
+}
+/* This selects the hamburger button */
+.act-menu-toggle{
+    z-index:100;
+    border:none;
+    background-color: transparent;
+}
+/* Nav containing menu to level ul */
+.act-menu{
+    left:0%;
+    width:100%;
+    padding: 0;
+    margin:0;
+    list-style-type: none;
+}
+
+/* min-height ensures that the bar is at least 50px, 
+   height must not be specified as that stops submenu expanding  */
+.act-menu-item{
+    left:0;
+    width:100%;
+    border: 1px solid var(--act-menu-border-color);
+    list-style-type: none;
+    padding: 0;
+    margin:0;
+    display: block;
+    min-height: 50px;
+}
+/* container (div) needed to give a full height solid block,
+   if just the link is coloured the colouring is only as high as the text
+   Height on the next 4 blocks is important to ensure colour doesn't leak to
+   the submenu.
+*/
+.act-menu-item-container{
+    position: relative; 
+    width: 100%;
+    height: 50px;
+    display: block;
+    border-collapse: collapse;
+    background-color: var(--act-menu-bg-color);
+}
+.act-menu-item-container:hover {
+    background-color: var(--act-menu-bg-hover-color);
+}
+/* link is 70% if there is an expand button */
+.act-menu-item-container-link{
+    top: 0;
+    left:0;
+    width: 70%;
+    height: 50px;
+    background-color: var(--act-menu-bg-color);
+    color: var(--act-menu-text-color);
+    text-decoration: none;
+    padding-left:10px;
+    line-height:50px;
+}
+.act-menu-item-container-link:hover {
+    background-color: var(--act-menu-bg-hover-color);
+    color: var(--act-menu-link-hover);
+}
+/* If there is no expand button the link is full width */
+.act-menu-item-container-link-simple{
+    width: 100%;
+}
+
+/* Button needs to be relative to act-menu-item-container */
+.act-menu-expand-button {
+    position: absolute; 
+    top: 0;
+    left:70%;
+    width:30%;
+    height: 50px;
+    background-color: var(--act-menu-button-color);
+    /* The color of the graphics on the button is set in act-hamburger-menu-colors.css
+       and is read directly by the .js */
+    border:none;
+    outline:none;
+    padding:2px;
+    line-height: 50px;
+    text-align: right;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+}
+.act-act-expand-button-img{
+    pointer-events:none;
+}
+/* Unordered list for a menu */
+.act-menu-submenu {
+    display:none;
+    list-style-type: none;
+    padding: 0;
+    margin:0;
+}
+
+/* Feint border around menu items */
+.act-menu-menuitem {
+    background-color: var(--act-menu-submenu-background);
+    border: 1px solid var(--act-menu-submenu-border-color);
+    padding: 0;
+    margin:0;
+    padding-left: 40px;
+    height:45px;
+    display: flex; 
+    align-items: center;
+}

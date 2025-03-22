@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ACT tools documentation</title>
+        <meta charset="UTF-8">
+        <style>
+            body{
+                margin: auto; /* Center horizontally */
+                max-width: 700px; /* Set maximum width */
+                width: 90%; /* Optional: Allow some flexibility on smaller screens */
+                flex: 1; /* Allows the main content to expand to fill available space */
+            }
+            table {
+                border-collapse: collapse; /* Collapse borders for single-line effect */
+                border: 1px solid #ccc; /* Add a border to the table itself */
+            }
+
+            th, td {
+                border: 1px solid #ccc; /* Add borders to table cells (th and td) */
+                padding: 8px; /* Add some padding within cells */
+                text-align: left; /* Default text alignment to the left */
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>ACT Tools</h1>
+        <p>This plugin contains widgets and other tools that are required by the ACT website:</p>
+        <ul>
+            <li><a href="#act-toggle-tooltips">act-toggle-tooltips</a> (aka Image Toggle Tooltips) provides a button which toggles the alternate text on a sibling image
+                to the button and changes the text of the button to reflect its function. 
+            </li>
+            <li><a href="#act-hamburger-menu">act-hamburger-menu</a> (aka Phone Navigation Menu)
+                 provides a menu for use with phones which replicates the navigation menu.</li>
+        </ul>
+        <h2 id="act-toggle-tooltips">act-toogle-tooltips</h2>
+        <p>When enabled this function modifies the behaviour of tooltips on images to include a button to show/hide the tooltip for alt text.</p>
+        <p>It is configured via the ACT Tools -> Image Toggle Tooltips menu item</p>
+        <p>Where the attributes are as follows:</p>
+        <table>
+            <tr><th>Attribute</th><th>Contents</th></tr>
+            <tr><td>showtext</td><td>Text that is to be shown on the button when the tooltips are hidden,
+                this should indicate the action the user needs to take, and could be either as shown
+                here or symbol such as + or &gt;
+            </td></tr>
+            <tr><td>hidetext</td><td>Text that is shown on the button when the tooltips are shown,
+                this should indicate the action the user needs to take, either as shown here of a symbol 
+                such as - or &lt;
+            </td></tr>
+            <tr><td>position</td><td>Controls the position of the button (left or right of the caption)</td></tr>
+            <tr><td>enable</td><td>When enabled the caption for each image (with caption) is modified to include a 
+                button which when pressed shows/hides the tooltip.
+            </td></tr>
+        </table>
+        <h2 id="act-hamburger-menu">act-hamburger-menu</h2>
+        <p>Unlike other <b>menu plugins</b> this works with <b>navigation blocks</b> rather than classic menus</p>
+        <p>When enabled this function modifies the navigation when on narrow screen device so that initially a navigation
+            button appears towards the top left of the screen. When the navigation button is pushed, the top level menu expands.
+            The top level menu spans the screen for each top level item, the majority of the bar when pressed links to the corresponding menu item,
+            the portion to the right with the downarrow on it when pressed shows subordinate menu items.
+        </p>
+        <p>It is configured via the ACT Tools -> Phone Navigation Menu menu item</p>
+        <p>Where the attributes are as follows:</p>
+        <table>
+            <tr><th>Attribute</th><th>Contents</th></tr>
+            <tr><td>Background Colour</td><td>Colour of the background of the top level menu</td></tr>
+            <tr><td>Background Hover Colour</td><td>Background when hovered over</td></tr>
+            <tr><td>Text Colour</td><td>Colour of text for top level menu</td></tr>
+            <tr><td>Link Hover Colour</td><td>Colour of text when hevered over</td></tr>
+            <tr><td>Border Colour</td><td>Colour of border of top level menu</td></tr>
+            <tr><td>Button Colour</td><td>colour of expand button</td></tr>
+            <tr><td>Button Text Colour</td><td>Colour of expand button for text/graphics</td></tr>
+            <tr><td>Submenu Background Colour</td><td>Colour of submenu item backgrounds</td></tr>
+            <tr><td>Submenu Border Colour</td><td>Colour of submenu borders</td></tr>
+            <tr><td>Cutoff Value</td><td>Point at which menu changes from navigation to hamburger button</td></tr>
+            <tr><td>Position</td><td>Position of the hamburger button on screen (right/centre/left)</td></tr>
+            <tr><td>Enabled</td><td>This tool must be enabled to work</td></tr>
+        </table>
+    </body>
+</html>
