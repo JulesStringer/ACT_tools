@@ -8,7 +8,7 @@ function act_menu_register_settings() {
     register_setting('act_menu_settings_group', 'act_menu_button_color', 'sanitize_hex_color');
     register_setting('act_menu_settings_group', 'act_menu_border_color', 'sanitize_hex_color');
     register_setting('act_menu_settings_group', 'act_menu_submenu_background', 'sanitize_hex_color');
-    register_setting('act_menu_settings_group', 'act_menu_item_border_color', 'sanitize_hex_color');
+    register_setting('act_menu_settings_group', 'act_menu_submenu_border_color', 'sanitize_hex_color');
     register_setting('act_menu_settings_group', 'act_menu_text_color', 'sanitize_hex_color');
     register_setting('act_menu_settings_group', 'act_menu_link_hover', 'sanitize_hex_color');
     register_setting('act_menu_settings_group', 'act_menu_button_text_color', 'sanitize_hex_color');
@@ -108,14 +108,8 @@ function act_menu_enqueue_admin_scripts($hook) {
     if ( $hook == 'act-tools_page_act-tools-menu-settings-page'){
         wp_enqueue_style('wp-color-picker');
         wp_enqueue_script('act-color-picker-script', plugins_url('../assets/js/act-color-picker-script.js', __FILE__), array('wp-color-picker'), false, true);
- //       wp_enqueue_script('act-hamburger-menu-script', plugins_url('../assets/js/act-hamburger-menu.js', __FILE__), array('jquery'), false, true); // Enqueue your script
-        // Pass settings to act-hamburger-menu.js
- //       wp_localize_script('act-hamburger-menu-script', 'actMenuSettings', array(
- //           'enable' => intval(get_option('act_menu_enable', 0)),
- //           'cutoffValue' => intval(get_option('act_menu_cutoff_value', '600')) // Pass cutoff value
- //       ));
     } else {
-        echo "Hook did not match.  Current hook is: " . $hook;
+     //   echo "Hook did not match.  Current hook is: " . $hook;
     }
 }
 add_action('admin_enqueue_scripts', 'act_menu_enqueue_admin_scripts');
@@ -127,7 +121,7 @@ function act_menu_output_custom_css() {
     $button_color = get_option('act_menu_button_color', '#F7F4D8');
     $border_color = get_option('act_menu_border_color', 'black');
     $submenu_background = get_option('act_menu_submenu_background', '#FFFFFF');
-    $item_border_color = get_option('act_menu_submenu_border_color', '#A0A0A0');
+    $submenu_border_color = get_option('act_menu_submenu_border_color', '#A0A0A0');
     $text_color = get_option('act_menu_text_color', 'black');
     $link_hover = get_option('act_menu_link_hover', '#76B44E');
     $button_text_color = get_option('act_menu_button_text_color', 'black');

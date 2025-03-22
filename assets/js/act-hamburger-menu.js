@@ -30,7 +30,7 @@ function replicateMenuItems($, $sourceList, $targetList, isubMenu) {
             $div.append(linkhtml);
             if ( $sourceItem.children('ul').first().length){
                 let html = '<button type="button" class="act-menu-expand-button" onclick="act_submenu_toggle(event);">';
-                html += '<img class="act-menu-expand-button-img" style="z-index"; alt="Down Arrow" src="' + downuri + '" />';
+                html += '<img class="act-menu-expand-button-img" alt="Down Arrow" src="' + downuri + '" />';
                 html += '</button>';
                 $div.append(html);
             }
@@ -68,12 +68,13 @@ function act_menu_toggle() {
 }
 function act_submenu_toggle(event){
     jQuery(document).ready(function ($) {
-        let $button = $(event.target);
+        let $target = $(event.target);
+        let $div = $target.closest('div');
+        let $button = $div.find('button');
         let $t = $button.parent().siblings('.act-menu-submenu');
         let $img = $button.find('img');
         console.log('Toggling submenu siblings length: ' + $t.length );
         console.log(' qualified siblings: ' + $t + ' display: ' + $t.css('display'));
-        //console.log('html: ' + $t.html());
         if ( $t.css('display') === 'none'){
             $('.act-menu-submenu').css({display:'none'});
             $('.act-menu-expand-button > img').attr('alt','downarrow');
@@ -81,12 +82,10 @@ function act_submenu_toggle(event){
             $t.css({display:'block'});
             $img.attr('alt','uparrow');
             $img.attr('src', upuri);
-            //console.log('Changing image to ' + upuri)
         } else {
             $t.css({display:'none'});
             $img.attr('src', downuri);
             $img.attr('alt', 'downarrow');
-            //console.log('Changing image to ' + downuri)
         }
     });
 }

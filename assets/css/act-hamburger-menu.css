@@ -94,7 +94,8 @@
     place-items: center;
 }
 .act-act-expand-button-img{
-    pointer-events:none;
+/*    pointer-events:none; 
+    z-index: 1; */
 }
 /* Unordered list for a menu */
 .act-menu-submenu {
