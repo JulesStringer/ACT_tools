@@ -2,9 +2,9 @@
 
 This plugin contains widgets and other tools that are required by the ACT website:
 + [act-toggle-tooltips](#act-toggle-tooltips) (aka Image Toggle Tooltips) provides a button which toggles the alternate text on a sibling image to the button and changes the text of the button to reflect its function. 
-+ [act-hamburger-menu]("#act-hamburger-menu") (aka Phone Navigation Menu) provides a menu for use with phones which replicates the navigation menu.
++ [act-hamburger-menu](#act-hamburger-menu) (aka Phone Navigation Menu) provides a menu for use with phones which replicates the navigation menu.
 
-## act-toogle-tooltips {act-toggle-tooltips}
+## act-toogle-tooltips {#act-toggle-tooltips}
 When enabled this function modifies the behaviour of tooltips on images to include a button to show/hide the tooltip for alt text.
 It is configured via the ACT Tools -> Image Toggle Tooltips menu item
 Where the attributes are as follows:
@@ -16,7 +16,7 @@ Where the attributes are as follows:
 |position|Controls the position of the button (left or right of the caption)|
 |enable|When enabled the caption for each image (with caption) is modified to include a button which when pressed shows/hides the tooltip.|
 
-## act-hamburger-menu {act-hamburger-menu}
+## act-hamburger-menu {#act-hamburger-menu}
 
 Unlike other **menu plugins** this works with **navigation blocks** rather than classic menus
 
