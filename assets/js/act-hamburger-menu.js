@@ -164,6 +164,7 @@ console.log('About to $navBlock.after $navBlock.length ' + $navBlock.length + ' 
 }
 let cutoff = 600;
 function isHamburgerMenuButtonVisible() {
+console.log('Window width: ' + window.innerWidth + ' Cutoff: ' + cutoff);
     let width = window.innerWidth;
     return width < cutoff;
 }
