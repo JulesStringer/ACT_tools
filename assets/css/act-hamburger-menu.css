@@ -1,14 +1,32 @@
+/*
 .act-mobile-menu{
     width:100%;
     display:flex;
-    justify-content: var(--act-menu-position); /* Align to the right */
-    align-items: center; /* Vertically align the button */
+    justify-content: var(--act-menu-position); 
+    align-items: center; 
+}
+*/
+.act-mobile-menu {
+    position: relative; 
+    width: 100%;
+    /* display: flex; REMOVED - This was causing flow issues */
 }
 /* Div to contain the hamburger button */
+/*
 .act-menu-toggle-div{
     display:flex;
-    justify-content: flex-end; /* Align button to the right */
+    justify-content: flex-end;
     height:25px;
+}
+*/
+.act-menu-toggle-div {
+    position: absolute; /* Anchor it relative to .act-mobile-menu or its parent */
+    top: 0;
+    right: 0; 
+    width: auto; /* Let content determine width */
+    height: auto; /* Let content determine height */
+    z-index: 1000; /* Ensure it's on top */
+    display: block;
 }
 /* This selects the hamburger button */
 .act-menu-toggle{

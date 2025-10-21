@@ -96,7 +96,7 @@ function act_toggle_tooltips_enqueue_scripts() {
         'act-toggle-tooltips',
         plugins_url('../assets/js/act-toggle-tooltips.js', __FILE__),
         array('wp-element', 'wp-data', 'jquery', 'wp-dom-ready', 'wp-block-editor'),
-        '1.0',
+        filemtime( plugin_dir_path( __FILE__ ) . '../assets/js/act-toggle-tooltips.js' ),
         true
     );
     // Pass settings from the database to JavaScript

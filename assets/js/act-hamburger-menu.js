@@ -58,7 +58,8 @@ function act_menu_toggle() {
         let $mobileMenu = $('#act-menu');
         console.log('Toggling small menu display was ' + $mobileMenu.css('display') + ' get(0): ' + $mobileMenu.get(0) + ' length: ' + $mobileMenu.length);
         if ($mobileMenu.css('display') == 'none') {
-            $mobileMenu.css({ display: 'block' });
+            //$mobileMenu.css({ display: 'block' });
+            $mobileMenu.css({ display: 'block', width: '100%' });
             console.log('On');
         } else {
             $mobileMenu.css({ display: 'none' });
@@ -115,12 +116,12 @@ function getuparrow(){
     
     return 'data:image/svg+xml;utf8,' + encodeURIComponent(uparrow);
 }
-function createMenuStructure($, $navBlock) {
+function createMenuStructure($, $ul, $button) {
     // Collect colours and symbols from :root
     upuri = getuparrow();
     downuri = getdownarrow();
     // Find the ul element within the nav block
-    const $originalMenu = $navBlock.find('ul').first();
+    const $originalMenu = $ul.first();
 
     if (!$originalMenu.length) {
         console.error('No ul element found within the nav block.');
@@ -157,8 +158,8 @@ function createMenuStructure($, $navBlock) {
     $mobileMenuContainer.append($mobileMenu);
 
     // Insert the mobile menu after the original nav block
-console.log('About to $navBlock.after $navBlock.length ' + $navBlock.length + ' element 0 ' + $navBlock.get(0));
-    $navBlock.after($mobileMenuContainer);
+console.log('About to $button.after $button.length ' + $button.length + ' element 0 ' + $button.get(0));
+    $button.after($mobileMenuContainer);
 
     return $mobileMenuContainer;
 }
@@ -172,19 +173,26 @@ function replaceHamburgerMenuContent($) {
 
     cutoff = actHamburgerSettings.cutoffValue;
 
-    const $navBlock = $('header > div > .wp-block-navigation'); // Or a more specific selector
+    //const $navBlock = $('header > div > .wp-block-navigation'); // Or a more specific selector
+    const $header = $('header');
+    const $nav = $header.find('nav');
+    const $ul = $nav.find('ul');
+    const $button = $nav.find('button');
+    if ( !$ul.get(0) ){
+        console.log('Could not find a ul element under a nav');
+    }
     if ( g_mobile_menu == null){
-        g_mobile_menu = createMenuStructure($, $navBlock);
+        g_mobile_menu = createMenuStructure($, $ul, $button);
         console.log('Created mobile menu');
     }
     if (isHamburgerMenuButtonVisible()) {
         console.log('HamburgerMenuButtonVisible');
-        $navBlock.css({display:'none'});
+        $button.css({display:'none'});
         g_mobile_menu.css({display:'inline-block'});
     } else {
-        $navBlock.css({display:'block'});
+        $button.css({display:'block'});
         $('.act-mobile-menu').css({display: 'none'});
-        console.log('Hamburger NOT visible');
+        //console.log('Hamburger NOT visible');
     }
 }
 // Call the function on page load and resize (if needed)

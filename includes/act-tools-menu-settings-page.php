@@ -107,7 +107,12 @@ add_action('admin_menu', 'act_menu_add_admin_menu');
 function act_menu_enqueue_admin_scripts($hook) {
     if ( $hook == 'act-tools_page_act-tools-menu-settings-page'){
         wp_enqueue_style('wp-color-picker');
-        wp_enqueue_script('act-color-picker-script', plugins_url('../assets/js/act-color-picker-script.js', __FILE__), array('wp-color-picker'), false, true);
+        wp_enqueue_script(
+            'act-color-picker-script', 
+            plugins_url('../assets/js/act-color-picker-script.js', __FILE__), array('wp-color-picker'), 
+            array(),
+            filemtime( plugin_dir_path( __FILE__ ) . '../assets/js/act-color-picker-script.js'), 
+            true);
     } else {
      //   echo "Hook did not match.  Current hook is: " . $hook;
     }

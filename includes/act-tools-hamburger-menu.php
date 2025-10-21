@@ -11,7 +11,7 @@ function act_hamburger_menu_enqueue_scripts() {
         'act-hamburger-menu',
         plugins_url('../assets/js/act-hamburger-menu.js', __FILE__),
         array('wp-element', 'wp-data', 'jquery', 'wp-dom-ready', 'wp-block-editor'),
-        '1.0',
+        filemtime( plugin_dir_path( __FILE__ ) . '../assets/js/act-hamburger-menu.js'),
         true
     );
     wp_localize_script('act-hamburger-menu', 'actHamburgerSettings', $hamburger_settings);
@@ -19,7 +19,9 @@ function act_hamburger_menu_enqueue_scripts() {
     // Enqueue CSS -  Make sure this CSS file exists and contains general layout, not colors.
     wp_enqueue_style(
         'act-hamburger-menus-style',
-        plugins_url('../assets/css/act-hamburger-menu.css',__FILE__)
+        plugins_url('../assets/css/act-hamburger-menu.css',__FILE__),
+        array(),
+        filemtime( plugin_dir_path( __FILE__ ) . '../assets/css/act-hamburger-menu.css')
     );
 }
 
