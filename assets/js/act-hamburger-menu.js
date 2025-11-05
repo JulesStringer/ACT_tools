@@ -1,4 +1,5 @@
 let g_mobile_menu = null;
+let g_menu_button = null;
 
 let upuri = '';
 let downuri = '';
@@ -54,18 +55,16 @@ function replicateMenuItems($, $sourceList, $targetList, isubMenu) {
 }
 // Define the toggle function in the global scope
 function act_menu_toggle() {
-    jQuery(document).ready(function ($) {
-        let $mobileMenu = $('#act-menu');
-        console.log('Toggling small menu display was ' + $mobileMenu.css('display') + ' get(0): ' + $mobileMenu.get(0) + ' length: ' + $mobileMenu.length);
-        if ($mobileMenu.css('display') == 'none') {
-            //$mobileMenu.css({ display: 'block' });
-            $mobileMenu.css({ display: 'block', width: '100%' });
-            console.log('On');
-        } else {
-            $mobileMenu.css({ display: 'none' });
-            console.log('Off');
-        }
-    });
+    let $mobileMenu = g_mobile_menu;
+    console.log('Toggling small menu display was ' + $mobileMenu.css('display') + ' get(0): ' + $mobileMenu.get(0) + ' length: ' + $mobileMenu.length);
+    if ($mobileMenu.css('display') == 'none') {
+        //$mobileMenu.css({ display: 'block' });
+        $mobileMenu.css({ display: 'block', width: '100%' });
+        console.log('On');
+    } else {
+        $mobileMenu.css({ display: 'none' });
+        console.log('Off');
+    }
 }
 function act_submenu_toggle(event){
     jQuery(document).ready(function ($) {
@@ -127,16 +126,14 @@ function createMenuStructure($, $ul, $button, $button_div) {
         console.error('No ul element found within the nav block.');
         return;
     }
-    if ( jQuery('#act-mobile-menu').get(0)){
+    if ( jQuery('#act-menu-button').get(0)){
         return;
     }
     // Create a new container for the mobile menu
-    const $mobileMenuContainer = $('<nav>').addClass('act-mobile-menu');
-    $mobileMenuContainer.attr('id','act-mobile-menu');
 
     // Create a button to toggle the menu
-    let html = '<div class="act-menu-toggle-div">';
-    html += '<button type="button" class="act-menu-toggle" id="act-menu-toggle" onclick="act_menu_toggle();">';
+    $menuButtonDiv = $('<div>').addClass('act-menu-button-div');
+    html = '<button type="button" class="act-menu-button" id="act-menu-button" onclick="act_menu_toggle();">';
     //html += 'A.Menu';
     html += '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">';
     html += '<rect width="20" height="2" fill="black"/>'
@@ -145,27 +142,30 @@ function createMenuStructure($, $ul, $button, $button_div) {
     html += '</svg>';
     html += '</button>';
     html += '</div>';
-    $mobileMenuContainer.append(html);
+    $menuButtonDiv.append(html);
 
     // Create a new ul element for the mobile menu
 
-    let $mobileMenu = $('<ul>').addClass('act-menu');
-    $mobileMenu.attr('id', 'act-menu');
+    const $mobileMenu = $('<nav>').addClass('act-menu');
+    $mobileMenu.attr('id','act-menu');
     $mobileMenu.css({display:'none'});
-    
+    let $mobileMenuRoot = $('<ul>');
     // Replicate the menu items
-    replicateMenuItems($, $originalMenu, $mobileMenu, false);
-    //$mobileMenuContainer.append($mobileMenu);
-    // menu goes after heading rather than appended to div 
+    replicateMenuItems($, $originalMenu, $mobileMenuRoot, false);
+    $mobileMenu.append($mobileMenuRoot);
+    // menu goes after heading rather than appended to div, this makes it appear underneath
     $button_div.after($mobileMenu); 
-    // Insert the mobile menu after the original nav block
-console.log('About to $button.after $button.length ' + $button.length + ' element 0 ' + $button.get(0));
-    // Find the header then the second subordinate div under
-    // put the existing button after the new button
-    //$button.after($mobileMenuContainer);
-    $button_div.append($mobileMenuContainer);
 
-    return $mobileMenuContainer;
+    // Insert the mobile menu after the original nav block
+//console.log('About to $button.after $button.length ' + $button.length + ' element 0 ' + $button.get(0));
+    // menu button is appended to the end of the div containing the header
+    $button_div.append($menuButtonDiv);
+    $button_div.css({width:'100%', display:'flex', 'justify-content':'space-between'});
+//    return $menuButtonDiv;
+    return {
+        menu: $mobileMenu,
+        button: $menuButtonDiv
+    };
 }
 let cutoff = 600;
 function isHamburgerMenuButtonVisible() {
@@ -174,7 +174,7 @@ console.log('Window width: ' + window.innerWidth + ' Cutoff: ' + cutoff);
     return width < cutoff;
 }
 function replaceHamburgerMenuContent($) {
-
+console.log('About to replaceHamburgerMenuContent');
     cutoff = actHamburgerSettings.cutoffValue;
 
     //const $navBlock = $('header > div > .wp-block-navigation'); // Or a more specific selector
@@ -183,28 +183,42 @@ function replaceHamburgerMenuContent($) {
     const $ul = $nav.find('ul');
     const $button = $nav.find('button');
     const $site_title = $header.find('.wp-block-site-title');
+    if ( $site_title.get(0)){
+        console.log('Could not find site title');
+    }
     const $button_div = $site_title.closest('div');
     if ( !$ul.get(0) ){
         console.log('Could not find a ul element under a nav');
     }
     if ( g_mobile_menu == null){
-        g_mobile_menu = createMenuStructure($, $ul, $button, $button_div);
+        let result = createMenuStructure($, $ul, $button, $button_div);
+        g_mobile_menu = result.menu;
+        g_menu_button = result.button;
         console.log('Created mobile menu');
     }
     if (isHamburgerMenuButtonVisible()) {
         console.log('HamburgerMenuButtonVisible');
         $button.css({display:'none'});
-        g_mobile_menu.css({display:'inline-block'});
+        //g_mobile_menu.css({display:'inline-block'});
+        g_mobile_menu.css({display:'none'});
+        g_menu_button.css({display:'inline-block'});
     } else {
         $button.css({display:'block'});
-        $('.act-mobile-menu').css({display: 'none'});
-        //console.log('Hamburger NOT visible');
+        $('.act-menu').css({display: 'none'});
+        g_mobile_menu.css({display: 'none'});
+        g_menu_button.css({display: 'none'});
+
+        console.log('Hamburger NOT visible');
     }
 }
 // Call the function on page load and resize (if needed)
 jQuery(document).ready(function($){
     replaceHamburgerMenuContent($);
 });
+/*
+ * don't implement resize rely on media query instead
+ * as this looses submenus
 jQuery(window).on('resize', function(){
     replaceHamburgerMenuContent(jQuery);
 });
+*/
