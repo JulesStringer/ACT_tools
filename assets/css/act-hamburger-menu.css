@@ -8,8 +8,13 @@
 */
 .act-mobile-menu {
     position: relative; 
-    width: 100%;
+    right:0;
+    margin:0;
+    padding:0;
+    /*width: 100%;*/
+    width: auto;
     /* display: flex; REMOVED - This was causing flow issues */
+    display: flex; /* reinstated now menu and button are separate */
 }
 /* Div to contain the hamburger button */
 /*
@@ -23,19 +28,29 @@
     position: absolute; /* Anchor it relative to .act-mobile-menu or its parent */
     top: 0;
     right: 0; 
-    width: auto; /* Let content determine width */
+    width: 25px;
+    /*width: auto;*/ /* Let content determine width */
     height: auto; /* Let content determine height */
     z-index: 1000; /* Ensure it's on top */
-    display: block;
+    display: flex; /* use flex rather then block to get it to the end */
+    margin:0;
+    padding:0;
+    justify-content: flex-end;
 }
+
 /* This selects the hamburger button */
 .act-menu-toggle{
     z-index:100;
     border:none;
     background-color: transparent;
+    padding:0;
 }
 /* Nav containing menu to level ul */
 .act-menu{
+    /* Absolute position makes this not be taken into account in height of title */
+    /*position: absolute;*/ 
+    /* top is a guess for height of title bar */ 
+    /*top:50px;*/           
     left:0%;
     width:100%;
     padding: 0;
@@ -133,143 +148,4 @@
     height:45px;
     display: flex; 
     align-items: center;
-}
-/* ========================================================================= */
-/* SECTION 1: Desktop (Min-Width: 601px) - For screens WIDER than mobile/tablet */
-/* ========================================================================= */
-@media (min-width: 600px) {
-    
-    /* Fix 1: Ensure Logo/Title and Navigation are on the Same Line */
-    /* **MUST CONFIRM CLASS:** Replace .wp-block-template-part-header with the actual common parent */
-    .wp-block-template-part-header { 
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        width: 100% !important;
-    }
-    .wp-block-template-part-header > .wp-block-group,
-    .wp-block-template-part-header > .wp-block-navigation {
-        flex-grow: 0 !important;
-        flex-shrink: 0 !important;
-    }
-    
-    /* Fix 2 & 3: Hide Hamburger Button & Reset Menu State (Most Crucial Fix) */
-    .wp-block-navigation__responsive-container-open {
-        display: none !important; /* Hides the hamburger icon */
-    }
-    
-    /* Reset the responsive menu container to desktop appearance */
-    .wp-block-navigation__responsive-container,
-    .wp-block-navigation__responsive-container.is-menu-open {
-        /* Reset mobile modal properties */
-        display: block !important;
-        position: static !important;
-        height: auto !important;
-        background: none !important;
-        z-index: auto !important;
-        visibility: visible !important; 
-        max-height: none !important;
-    }
-    
-    /* Reset the UL list container to horizontal desktop styling */
-    .wp-block-navigation__responsive-container-content .wp-block-navigation__container {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: flex-start !important;
-        overflow: visible !important; 
-    }
-    
-    /* Reset all submenus to be hidden (default desktop behaviour) */
-    .wp-block-navigation__submenu-container {
-        display: none !important; 
-        position: absolute !important; /* Default desktop dropdown positioning */
-    }
-    
-    /* Restore desktop hover behaviour for submenus */
-    .wp-block-navigation__container > li {
-        width: auto !important;
-    }
-    .wp-block-navigation__container > li:hover > .wp-block-navigation__submenu-container,
-    .wp-block-navigation__container > li:focus-within > .wp-block-navigation__submenu-container {
-        display: block !important;
-    }
-}
-
-
-/* ========================================================================= */
-/* SECTION 2: Mobile (Max-Width: 600px) - For screens NARROWER than desktop */
-/* ========================================================================= */
-@media (max-width: 599px) {
-    
-    /* Fix Button Position to the Right */
-    .wp-block-navigation.is-responsive {
-        justify-content: flex-end !important;
-        width: 100%;
-    }
-    .wp-block-navigation__responsive-container-open {
-        display: flex !important;
-    }
-
-    /* Hide the menu container when CLOSED (Standard specificity is fine here) */
-    .wp-block-navigation__responsive-container:not(.is-menu-open) {
-        display: none !important;
-        visibility: hidden !important; 
-    }
-
-    /* FIX VISIBILITY: SHOW the menu when OPEN (High Specificity) */
-    html.has-modal-open .wp-block-navigation__responsive-container.is-menu-open {
-        display: block !important; 
-        visibility: visible !important;
-        
-        /* Positioning */
-        position: absolute !important; 
-        top: 60px !important; /* Adjust header height */
-        height: auto !important; 
-        max-height: calc(100vh - 60px) !important; 
-        overflow-y: auto; 
-        width: 100% !important; 
-        left: 0 !important;
-        
-        background-color: #f7f7f7 !important; 
-        z-index: 1000 !important; 
-    }
-
-    /* FIX MODAL OVERLAY: Override internal closing wrapper (High Specificity) */
-    html.has-modal-open .wp-block-navigation__responsive-close {
-        position: static !important;
-        height: auto !important;
-        width: 100% !important;
-        background: none !important; 
-        padding: 0 !important;
-    }
-    
-    /* Left Justify the Menu Content */
-    .wp-block-navigation__responsive-dialog,
-    .wp-block-navigation__responsive-container-content {
-        align-items: flex-start !important;
-        text-align: left !important;
-    }
-
-    /* List Container Styling (Vertical and Left-Justified) */
-    .wp-block-navigation__responsive-container-content .wp-block-navigation__container {
-        justify-content: flex-start !important; 
-        align-items: flex-start !important;
-        flex-direction: column !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        display: block !important; 
-    }
-    
-    .wp-block-navigation__responsive-container-content .wp-block-navigation__container > li {
-        width: 100% !important;
-        text-align: left !important;
-    }
-
-    /* Collapse Submenus */
-    .wp-block-navigation__submenu-container {
-        display: none !important; 
-    }
-    .wp-block-navigation__submenu-container[data-wp-bind--aria-expanded="state.isMenuOpen"] {
-        display: block !important;
-    }
 }
