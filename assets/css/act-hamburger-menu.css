@@ -1,17 +1,5 @@
 /* div that contains the button show go on the right of the title bar*/
-.act-menu-button-div {
-/*    position:relative; */
-    right:0;
-    margin:0;
-    padding:0;
-    width: auto;
-    height: auto;
-    border: none;
-    /*display:flex;*/ /* display style is set by js code */
-/*    float: right; */
-    z-index:1000;
-    background:transparent;
-}
+/*
 /* Containing div has width set to 100% in javascript */
 /* button that goes in the above div and toggles the menu */
 .act-menu-button {
@@ -103,10 +91,6 @@
     display: grid;
     place-items: center;
 }
-.act-act-expand-button-img{
-/*    pointer-events:none; 
-    z-index: 1; */
-}
 /* Unordered list for a menu */
 .act-menu-submenu {
     display:none;
@@ -126,28 +110,24 @@
     display: flex; 
     align-items: center;
 }
-@media (min-width: 600px) {
+/* Hides the default hamburger menu button at all times */
+.wp-block-navigation__responsive-container-open {
+    display: none !important;
+}
+@media (min-width: 750px){
     .act-menu-button {
         display: none;
-    }
-    .act-menu-button-div{
-        display:none;
-    }
-    .wp-block-navigation__responsive-container-open {
-        display: block;
     }
     .act-menu {
-        display: none;
+        display: none  !important;
     }
 }
-@media (max-width: 599px) {
+@media (max-width: 749px ){
     .act-menu-button {
         display: inline-flex;
     }
-    .act-menu-button-div{
-        display: inline-flex;
-    }
-    .wp-block-navigation__responsive-container-open {
-        display: none;
+    .wp-block-navigation__responsive-container {
+        display: none !important; 
     }
 }
+

@@ -26,5 +26,29 @@ function act_hamburger_menu_enqueue_scripts() {
 }
 
 add_action('wp_enqueue_scripts', 'act_hamburger_menu_enqueue_scripts');
+function act_menu_button( $atts ) {
+    // Set up default attributes
+    $atts = shortcode_atts(
+        array(
+        ),
+        $atts,
+        'act_menu_button'
+    );
+    // put popup_menu after the header
+    // Build and return the HTML output
+    $html = '<button type="button" class="act-menu-button" id="act-menu-button" onclick="act_menu_toggle();">';
+    //html += 'A.Menu';
+    $html .= '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">';
+    $html .= '<rect width="20" height="2" fill="black"/>';
+    $html .= '<rect y="8.5" width="20" height="2" fill="black"/>';
+    $html .= '<rect y="17" width="20" height="2" fill="black"/>';
+    $html .= '</svg>';
+    $html .= '</button>';
+    //$html .= '</div>';
+    //button_html = create_menu_button(jQuery);
+    //console.log('button_html: ' + button_html);
 
+    return $html;
+}
+add_shortcode( 'act_menu_button', 'act_menu_button' );
 ?>

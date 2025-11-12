@@ -10,4 +10,5 @@
     --act-menu-text-color: black;
     --act-menu-link-hover: #76B44E;
     --act-menu-button-text-color: black;
+    --act-menu-cutoff-value: 1000px;
 }

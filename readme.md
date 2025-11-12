@@ -20,6 +20,12 @@ Where the attributes are as follows:
 
 Unlike other **menu plugins** this works with **navigation blocks** rather than classic menus
 
+This plugin exposes a shortcode, which displays a hamburger style menu when the screen width is less than 750px. This shortcode should be added to the top row of the header. When expanded the menu displays as a drop down menu with the same structure as the main menu.
+```
+  [act_menu_button]
+```
+This menu button also suppresses the default behaviour, which is to display a button on the left of the screen below 600px, when expanded this expands a menu with no structure which occupies the whole screen depth.
+
 When enabled this function modifies the navigation when on narrow screen device so that initially a navigation button appears towards the top left of the screen. When the navigation button is pushed, the top level menu expands.
 The top level menu spans the screen for each top level item, the majority of the bar when pressed links to the corresponding menu item, the portion to the right with the downarrow on it when pressed shows subordinate menu items.
 
@@ -36,7 +42,4 @@ Where the attributes are as follows:
 |Button Text Colour|Colour of expand button for text/graphics|
 |Submenu Background Colour|Colour of submenu item backgrounds|
 |Submenu Border Colour|Colour of submenu borders|
-|Cutoff Value|Point at which menu changes from navigation to hamburger button|
-|Position|Position of the hamburger button on screen (right/centre/left)|
-|Enabled|This tool must be enabled to work|
 

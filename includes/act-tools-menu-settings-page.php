@@ -72,10 +72,11 @@ function act_menu_settings_page() {
                     <td><input type="text" name="act_menu_submenu_border_color" value="<?php echo esc_attr(get_option('act_menu_submenu_border_color', '#A0A0A0')); ?>"
                         class="act-color-picker"  data-alpha="true" /></td>
                 </tr>
-                <tr valign="top">
+<!--                <tr valign="top">
                     <th scope="row">Cutoff Value (px)</th>
-                    <td><input type="text" name="act_menu_cutoff_value" value="<?php echo esc_attr(get_option('act_menu_cutoff_value', '600')); ?>" /></td>
+                    <td><input type="text" name="act_menu_cutoff_value" value="<?php echo esc_attr(get_option('act_menu_cutoff_value', '1000')); ?>" /></td>
                 </tr>
+
                 <tr valign="top">
                     <th scope="row">Position</th>
                     <td>
@@ -90,6 +91,7 @@ function act_menu_settings_page() {
                     <th scope="row">Enable</th>
                     <td><input type="checkbox" name="act_menu_enable" <?php checked(get_option('act_menu_enable', 1), 1); ?> value="1" /></td>
                 </tr>
+-->
             </table>
             <?php submit_button(); ?>
         </form>
@@ -130,6 +132,7 @@ function act_menu_output_custom_css() {
     $text_color = get_option('act_menu_text_color', 'black');
     $link_hover = get_option('act_menu_link_hover', '#76B44E');
     $button_text_color = get_option('act_menu_button_text_color', 'black');
+    /*
     $enable = get_option('act_menu_enable', 0); // Added get_option for enable
     $position = get_option('act_menu_position', 'right'); // Added get_option for position
     $position_mapping = array(
@@ -139,7 +142,7 @@ function act_menu_output_custom_css() {
     );
     // Use a default value if the stored value is not valid
     $flex_position = isset($position_mapping[$position]) ? $position_mapping[$position] : 'flex-end';
-
+*/
     ?>
     <style type="text/css">
         :root {
@@ -152,21 +155,20 @@ function act_menu_output_custom_css() {
             --act-menu-text-color: <?php echo esc_attr($text_color); ?>;
             --act-menu-link-hover: <?php echo esc_attr($link_hover); ?>;
             --act-menu-button-text-color: <?php echo esc_attr($button_text_color); ?>;
-            --act-menu-position: <?php echo esc_attr($flex_position); ?>;
         }
     </style>
     <?php
 }
 add_action('wp_head', 'act_menu_output_custom_css');
 
-function act_menu_get_cutoff_value() {
-    return intval(get_option('act_menu_cutoff_value', '600'));
-}
+//function act_menu_get_cutoff_value() {
+//    return intval(get_option('act_menu_cutoff_value', '1000'));
+//}
 // Function to set default options on plugin activation
-function act_menu_set_default_options() {
-    // Set default position to 'right'
-    update_option('act_menu_position', 'right');
-    update_option('act_menu_enable', 1); // Set enable to 1 on activation
-}
+//function act_menu_set_default_options() {
+//    // Set default position to 'right'
+//    update_option('act_menu_position', 'right');
+//    update_option('act_menu_enable', 1); // Set enable to 1 on activation
+//}
 register_activation_hook(__FILE__, 'act_menu_set_default_options');
 ?>
