@@ -118,7 +118,7 @@ add_action('enqueue_block_assets', 'act_toggle_tooltips_enqueue_scripts');
 add_action('wp_enqueue_scripts', 'act_toggle_tooltips_enqueue_scripts');
 
 function act_tools_toggle_tooltips_image_block( $block_content, $block ) {
-    if ( 'core/image' === $block['blockName'] ) {
+    if ( 'core/image' === $block['blockName'] && strlen($block_content) > 0 ) {
         $showText  = get_option('act_toggle_tooltips_showtext', 'More...');
         $hideText  = get_option('act_toggle_tooltips_hidetext', 'Less...');
         $position  = get_option('act_toggle_tooltips_position', 'left');
